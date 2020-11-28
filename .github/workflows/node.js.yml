@@ -32,5 +32,5 @@ jobs:
       with:
         source_dir: dist
         container_name: $web
-        connection_string: 'DefaultEndpointsProtocol=https;AccountName=projectblackbirdsite;AccountKey=nrkvEcwRVZTEXnFMWiDdvUE04R5u6NACCVMVq0IYr8byjLrb0/QP5/AAVHGwyQGP6T3r6ciQq02YDrpE++6e5Q==;EndpointSuffix=core.windows.net'
+        connection_string: 'DefaultEndpointsProtocol=https;AccountName=buildmytimelapsesite;AccountKey=0UI80ePYQswUJEN9ft0av9zUQXI2AA5dkQFy+2g8DJGZyqmJVQ5Q4krdGzNoStiFaIml31aSMaf/2LUtMO3gxg==;EndpointSuffix=core.windows.net'
         sync: true
