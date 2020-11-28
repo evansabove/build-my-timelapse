@@ -1,0 +1,36 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: Publish to Azure
+      uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+      with:
+        source_dir: dist
+        container_name: $web
+        connection_string: 'DefaultEndpointsProtocol=https;AccountName=projectblackbirdsite;AccountKey=nrkvEcwRVZTEXnFMWiDdvUE04R5u6NACCVMVq0IYr8byjLrb0/QP5/AAVHGwyQGP6T3r6ciQq02YDrpE++6e5Q==;EndpointSuffix=core.windows.net'
+        sync: true
